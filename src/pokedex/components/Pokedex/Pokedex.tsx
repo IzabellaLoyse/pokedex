@@ -1,41 +1,52 @@
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { IPokemonDetails } from '../../../pokemon/interfaces/pokemonDetails';
 import { listPokemons } from '../../../pokemon/services/listPokemons';
-import { pokemonDetails } from '../../../pokemon/services/pokemonDetails';
 import { IPokemons } from '../../interfaces/pokemons';
+import Card from '../Card/Card';
 
 const Pokedex: React.FC = () => {
   const [pokemons, setPokemons] = useState<IPokemons[]>([]);
   const [selectedPokemon, setSelectedPokemon] = useState<IPokemons | undefined>(
     undefined,
   );
-  const [selectedPokemonDetails, setSelectedPokemonDetails] = useState<
-    IPokemonDetails | undefined
-  >(undefined);
+  const navigate = useNavigate();
 
   useEffect(() => {
     listPokemons().then((response) => setPokemons(response.results));
   }, []);
 
-  useEffect(() => {
-    if (!selectedPokemon) return;
-
-    pokemonDetails(selectedPokemon.name).then((response) =>
-      setSelectedPokemonDetails(response),
-    );
-  }, [selectedPokemon]);
+  const handleSelectedPokemon = (pokemon: IPokemons) => {
+    navigate(`/pokemon/${pokemon.name}`, { replace: true });
+  };
 
   return (
     <>
-      {pokemons?.map((pokemon) => (
-        <button type="button" onClick={() => setSelectedPokemon(pokemon)}>
-          {pokemon.name}
-        </button>
-      ))}
+      <Container maxWidth="md">
+        <Box>
+          <h1>Pokedex</h1>
+        </Box>
+        <Box mt={2}>
+          <h2>Escolha o seu Pokemon</h2>
+        </Box>
+      </Container>
 
-      <p>{selectedPokemon?.name || 'Nao encontrado'}</p>
-      {JSON.stringify(selectedPokemonDetails, undefined, 2)}
+      <Container maxWidth="md">
+        <Box mt={10}>
+          <Grid container spacing={2}>
+            {pokemons?.map((pokemon) => (
+              <>
+                <Grid item xs={6} lg={3}>
+                  <Card />
+                </Grid>
+              </>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
     </>
   );
 };

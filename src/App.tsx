@@ -1,10 +1,13 @@
-import Pokedex from './pokedex/components/Pokedex/Pokedex';
+import { BrowserRouter as Router } from 'react-router-dom';
+import RoutesApp from './routes';
 
 const App: React.FC = () => {
   return (
-    <div>
-      <Pokedex />
-    </div>
+    <>
+      <Router>
+        <RoutesApp />
+      </Router>
+    </>
   );
 };
 
