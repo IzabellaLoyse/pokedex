@@ -1,27 +1,14 @@
+import { CircularProgress } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 import { listPokemons } from '../../../pokemon/services/listPokemons';
-import { IPokemons } from '../../interfaces/pokemons';
-import Card from '../Card/Card';
+import CardPokemon from '../Card/CardPokemon';
 
 const Pokedex: React.FC = () => {
-  const [pokemons, setPokemons] = useState<IPokemons[]>([]);
-  const [selectedPokemon, setSelectedPokemon] = useState<IPokemons | undefined>(
-    undefined,
-  );
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    listPokemons().then((response) => setPokemons(response.results));
-  }, []);
-
-  const handleSelectedPokemon = (pokemon: IPokemons) => {
-    navigate(`/pokemon/${pokemon.name}`, { replace: true });
-  };
+  const { data, isLoading, isError } = useQuery(`pokemons`, listPokemons);
 
   return (
     <>
@@ -35,17 +22,23 @@ const Pokedex: React.FC = () => {
       </Container>
 
       <Container maxWidth="md">
-        <Box mt={10}>
-          <Grid container spacing={2}>
-            {pokemons?.map((pokemon) => (
-              <>
-                <Grid item xs={6} lg={3}>
-                  <Card />
+        {!isLoading ? (
+          <Box mt={10}>
+            <Grid container spacing={2}>
+              {data?.results.map((pokemon) => (
+                <Grid item xs={12} sm={6} md={4} lg={4} key={pokemon.name}>
+                  <CardPokemon pokemon={pokemon} />
                 </Grid>
-              </>
-            ))}
-          </Grid>
-        </Box>
+              ))}
+            </Grid>
+          </Box>
+        ) : (
+          <div>
+            <CircularProgress />
+          </div>
+        )}
+
+        {isError && <div>Erro ao carregar os dados</div>}
       </Container>
     </>
   );
