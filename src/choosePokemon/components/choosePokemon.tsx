@@ -1,13 +1,26 @@
+import {
+  ButtonChoosePokemon,
+  ContainerWrapper,
+  ContentImage,
+  Title,
+} from './style';
+
 const ChoosePokemon: React.FC = () => {
   return (
-    <section>
-      <h1>
+    <ContainerWrapper>
+      <Title>
         <span>Bem vindo a </span>
         Pokedex
-      </h1>
+      </Title>
 
-      <a href="/pokemons">Escolha o seu pokemon</a>
-    </section>
+      <ContentImage>
+        <img src="/images/pokemons.png" alt="Pokémons perto de uma pokebola" />
+      </ContentImage>
+
+      <ButtonChoosePokemon href="/pokemons">
+        Escolha o seu Pokémon
+      </ButtonChoosePokemon>
+    </ContainerWrapper>
   );
 };
 

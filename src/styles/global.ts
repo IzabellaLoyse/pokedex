@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     line-height: 1.5;
+    font-family: 'Poppins', sans-serif;
   }
 
   p,

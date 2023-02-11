@@ -31,7 +31,7 @@ const PokemonDetails: React.FC = () => {
       <Container maxWidth="md">
         <Box mt={2}>
           <IconButton aria-label="back">
-            <Link to="/">
+            <Link to="/pokemons">
               <ArrowBack />
             </Link>
           </IconButton>

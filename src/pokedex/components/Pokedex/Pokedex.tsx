@@ -1,8 +1,10 @@
-import { CircularProgress } from '@mui/material';
+import { ArrowBack } from '@mui/icons-material';
+import { CircularProgress, IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
 import { listPokemons } from '../../../pokemon/services/listPokemons';
 import CardPokemon from '../Card/CardPokemon';
@@ -13,11 +15,15 @@ const Pokedex: React.FC = () => {
   return (
     <>
       <Container maxWidth="md">
+        <IconButton aria-label="back">
+          <Link to="/">
+            <ArrowBack />
+          </Link>
+        </IconButton>
+
+        <Box>Boa noite, visitante</Box>
         <Box>
           <h1>Pokedex</h1>
-        </Box>
-        <Box mt={2}>
-          <h2>Escolha o seu Pokemon</h2>
         </Box>
       </Container>
 
