@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter as Router } from 'react-router-dom';
 import RoutesApp from './routes';
+import GlobalStyle from './styles/global';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,6 +18,7 @@ const App: React.FC = () => {
   return (
     <>
       <QueryClientProvider client={queryClient}>
+        <GlobalStyle />
         <Router>
           <RoutesApp />
         </Router>
