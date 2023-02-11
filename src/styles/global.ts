@@ -6,6 +6,8 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    outline-offset: 0.25rem;
+
   }
 
   html {
@@ -39,6 +41,10 @@ const GlobalStyle = createGlobalStyle`
 
   a {
     text-decoration: none;
+
+    svg {
+      color: ${variablesGlobal.colors.secondColor};
+    }
   }
 
   img {

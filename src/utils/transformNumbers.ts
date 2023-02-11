@@ -3,7 +3,6 @@ export const transformNumbers = (number: any) => {
     return `#00${number}`;
   } else if (number < 100) {
     return `#0${number}`;
-  } else {
-    return number;
   }
+  return number;
 };
