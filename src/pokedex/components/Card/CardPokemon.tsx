@@ -1,13 +1,19 @@
 import { useNavigate } from 'react-router-dom';
 import { ICardProps } from '../../interfaces/cardProps';
 
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import Chip from '@mui/material/Chip';
-import { Container } from '@mui/system';
+import { ITypeImages } from '../../interfaces/typeImages';
+import { CardImage, CardInfos, CardWrapper, TypeImage } from './style';
+
+const typeImages: ITypeImages | any = {
+  grass: '/icons/grass.png',
+  poison: '/icons/poison.png',
+  fire: '/icons/fire.png',
+  water: '/icons/water.png',
+  flying: '/icons/flying.png',
+  bug: '/icons/bug.png',
+  normal: '/icons/pokeball.png',
+};
 
 const CardPokemon: React.FC<ICardProps> = ({ pokemon }) => {
   const navigate = useNavigate();
@@ -19,50 +25,53 @@ const CardPokemon: React.FC<ICardProps> = ({ pokemon }) => {
   return (
     <>
       <Card
-        sx={{ width: 250, height: 140, cursor: 'pointer' }}
+        sx={{
+          width: 250,
+          height: 250,
+          cursor: 'pointer',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: '20px',
+          backgroundColor: '#343d64',
+        }}
         onClick={() => handleSelectedPokemon()}
       >
-        <Container
-          maxWidth="md"
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-          }}
-        >
-          <CardHeader
-            sx={{ padding: 0, marginTop: 2 }}
-            title={pokemon.name}
-            subheader={pokemon?.types?.map((type) => (
-              <Box mb={1} key={type?.type?.name}>
-                <Chip
-                  avatar={
-                    <Avatar
-                      style={{ width: 30, height: 20 }}
-                      alt={pokemon.name}
-                      src={pokemon.sprites?.front_shiny}
-                    />
-                  }
-                  label={type?.type?.name}
-                  variant="filled"
-                />
-              </Box>
+        <CardImage>
+          <img src={pokemon.sprites?.front_default} alt={pokemon.name} />
+        </CardImage>
+
+        <CardWrapper>
+          <CardInfos>
+            <h3>{pokemon.name}</h3>
+
+            {pokemon?.types?.map((type) => (
+              <div key={type?.type?.name}>
+                <div>
+                  <TypeImage
+                    src={typeImages[type?.type?.name?.split(' ') as any]}
+                    alt={`Tipo ${type?.type?.name}`}
+                  />
+                </div>
+              </div>
             ))}
-          />
-          <CardMedia
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingTop: 2,
-            }}
-            component="img"
-            height="100"
-            width="100"
-            image={pokemon.sprites?.front_default}
-            alt={pokemon.name}
-          />
-        </Container>
+          </CardInfos>
+
+          <div>
+            <p>
+              Height
+              <span> {pokemon?.height}</span>
+            </p>
+
+            <p>
+              Weight
+              <span> {pokemon?.weight}</span>
+            </p>
+          </div>
+
+          <div></div>
+        </CardWrapper>
       </Card>
     </>
   );
