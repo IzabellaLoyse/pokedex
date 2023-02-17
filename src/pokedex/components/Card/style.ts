@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { variablesGlobal } from '../../../styles/variables';
 
 export const CardImage = styled.div`
   align-items: center;
@@ -30,4 +31,23 @@ export const CardInfos = styled.div`
 
 export const TypeImage = styled.img`
   width: 1.1rem;
+`;
+
+export const WrapperMeasurements = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  p {
+    font-weight: ${variablesGlobal.fontWeight.regular};
+    color: ${variablesGlobal.colors.secondColor};
+
+    span {
+      font-weight: ${variablesGlobal.fontWeight.bold};
+      color: ${variablesGlobal.colors.bgButtonHover};
+    }
+  }
 `;

@@ -3,7 +3,13 @@ import { ICardProps } from '../../interfaces/cardProps';
 
 import Card from '@mui/material/Card';
 import { ITypeImages } from '../../interfaces/typeImages';
-import { CardImage, CardInfos, CardWrapper, TypeImage } from './style';
+import {
+  CardImage,
+  CardInfos,
+  CardWrapper,
+  TypeImage,
+  WrapperMeasurements,
+} from './style';
 
 const typeImages: ITypeImages | any = {
   grass: '/icons/grass.png',
@@ -58,7 +64,7 @@ const CardPokemon: React.FC<ICardProps> = ({ pokemon }) => {
             ))}
           </CardInfos>
 
-          <div>
+          <WrapperMeasurements>
             <p>
               Height
               <span> {pokemon?.height}</span>
@@ -68,9 +74,7 @@ const CardPokemon: React.FC<ICardProps> = ({ pokemon }) => {
               Weight
               <span> {pokemon?.weight}</span>
             </p>
-          </div>
-
-          <div></div>
+          </WrapperMeasurements>
         </CardWrapper>
       </Card>
     </>
