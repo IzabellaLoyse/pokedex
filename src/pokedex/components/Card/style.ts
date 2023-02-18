@@ -22,17 +22,6 @@ export const CardWrapper = styled.section`
   padding: 1rem;
 `;
 
-export const CardInfos = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1rem;
-`;
-
-export const TypeImage = styled.img`
-  width: 1.1rem;
-`;
-
 export const WrapperMeasurements = styled.div`
   display: flex;
   justify-content: space-between;

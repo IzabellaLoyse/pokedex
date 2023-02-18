@@ -1,31 +1,14 @@
-import { useNavigate } from 'react-router-dom';
-import { ICardProps } from '../../interfaces/cardProps';
-
 import Card from '@mui/material/Card';
-import { ITypeImages } from '../../interfaces/typeImages';
-import {
-  CardImage,
-  CardInfos,
-  CardWrapper,
-  TypeImage,
-  WrapperMeasurements,
-} from './style';
-
-const typeImages: ITypeImages | any = {
-  grass: '/icons/grass.png',
-  poison: '/icons/poison.png',
-  fire: '/icons/fire.png',
-  water: '/icons/water.png',
-  flying: '/icons/flying.png',
-  bug: '/icons/bug.png',
-  normal: '/icons/pokeball.png',
-};
+import { useNavigate } from 'react-router-dom';
+import PokemonInfo from '../../../shared/PokemonInfo/PokemonInfo';
+import { ICardProps } from '../../interfaces/cardProps';
+import { CardImage, CardWrapper, WrapperMeasurements } from './style';
 
 const CardPokemon: React.FC<ICardProps> = ({ pokemon }) => {
   const navigate = useNavigate();
 
   const handleSelectedPokemon = () => {
-    navigate(`/pokemon/${pokemon.name}`, { replace: false });
+    navigate(`/pokemon/${pokemon?.name}`, { replace: false });
   };
 
   return (
@@ -45,25 +28,11 @@ const CardPokemon: React.FC<ICardProps> = ({ pokemon }) => {
         onClick={() => handleSelectedPokemon()}
       >
         <CardImage>
-          <img src={pokemon.sprites?.front_default} alt={pokemon.name} />
+          <img src={pokemon?.sprites?.front_default} alt={pokemon?.name} />
         </CardImage>
 
         <CardWrapper>
-          <CardInfos>
-            <h3>{pokemon.name}</h3>
-
-            {pokemon?.types?.map((type) => (
-              <div key={type?.type?.name}>
-                <div>
-                  <TypeImage
-                    src={typeImages[type?.type?.name?.split(' ') as any]}
-                    alt={`Tipo ${type?.type?.name}`}
-                  />
-                </div>
-              </div>
-            ))}
-          </CardInfos>
-
+          <PokemonInfo pokemon={pokemon} />
           <WrapperMeasurements>
             <p>
               Height
