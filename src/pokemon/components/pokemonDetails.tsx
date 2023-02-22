@@ -7,7 +7,14 @@ import { Link, useParams } from 'react-router-dom';
 import PokemonInfo from '../../shared/PokemonInfo/PokemonInfo';
 import { transformNumbers } from '../../utils/transformNumbers';
 import { pokemonDetails } from '../services/pokemonDetails';
-import { ContainerInfo, Measurements, PokeImage } from './style';
+import {
+  BaseStats,
+  ContainerInfo,
+  Measurements,
+  PokeAbilities,
+  PokeImage,
+  WrapperPokeInfo,
+} from './style';
 
 const PokemonDetails: React.FC = () => {
   const { name } = useParams();
@@ -53,30 +60,31 @@ const PokemonDetails: React.FC = () => {
           </p>
         </Measurements>
 
-        <Box>
-          <h4>Habilidades</h4>
+        <Box mt={2}>
+          <WrapperPokeInfo>
+            <h4>Habilidades</h4>
 
-          <div>
-            {selectedPokemonDetails?.abilities?.map((ability) => (
-              <div key={ability.ability?.name}>
-                <p>{ability.ability?.name}</p>
-              </div>
-            ))}
-          </div>
+            <PokeAbilities>
+              {selectedPokemonDetails?.abilities?.map((ability) => (
+                <p key={ability.ability?.name}>{ability.ability?.name}</p>
+              ))}
+            </PokeAbilities>
+          </WrapperPokeInfo>
         </Box>
 
-        <Box>
-          <h4>Estatísticas Básicas</h4>
-          <div>
-            {selectedPokemonDetails?.stats?.map((stat) => (
-              <div key={stat.stat?.name}>
-                <p>
+        <Box mt={2}>
+          <WrapperPokeInfo>
+            <h4>Estatísticas Básicas</h4>
+
+            <BaseStats>
+              {selectedPokemonDetails?.stats?.map((stat) => (
+                <p key={stat.stat?.name}>
                   {stat.stat?.name}
                   <span>{stat.base_stat}</span>
                 </p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </BaseStats>
+          </WrapperPokeInfo>
         </Box>
       </Container>
     </>
